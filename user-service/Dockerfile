@@ -8,7 +8,7 @@ COPY go.* ./
 RUN go mod download
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/bin/server -a -installsuffix cgo main.go repository.go handler.go database.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/bin/server -a -installsuffix cgo main.go repository.go handler.go database.go token_service.go
 
 FROM scratch as release
 COPY --from=builder /go/bin/server /go/bin/server
