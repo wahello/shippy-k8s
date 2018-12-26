@@ -1,10 +1,7 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
-	"os"
 
 	microclient "github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
@@ -13,32 +10,21 @@ import (
 	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
 )
 
-const (
-	defaultFilename string = "consignment.json"
-)
-
-func parseFile(file string) (*pb.Consignment, error) {
-	var consignment *pb.Consignment
-	data, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-	json.Unmarshal(data, &consignment)
-	return consignment, err
-}
-
 func main() {
 	cmd.Init()
 	client := pb.NewShippingService("go.micro.srv.consignment", microclient.DefaultClient)
 
-	file := defaultFilename
-	if len(os.Args) > 1 {
-		file = os.Args[1]
-	}
-
-	consignment, err := parseFile(file)
-	if err != nil {
-		log.Fatalf("could not parse file: %v", err)
+	consignment := &pb.Consignment{
+		Description: "This is a test consignment",
+		Weight:      550,
+		Containers: []*pb.Container{
+			{
+				CustomerId: "cust001",
+				UserId:     "user001",
+				Origin:     "Manchester, United Kingdom",
+			},
+		},
+		VesselId: "vessel001",
 	}
 
 	r, err := client.CreateConsignment(context.Background(), consignment)
