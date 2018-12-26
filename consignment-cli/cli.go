@@ -13,26 +13,32 @@ import (
 func main() {
 	cmd.Init()
 	client := pb.NewShippingService("go.micro.srv.consignment", microclient.DefaultClient)
-
 	consignment := &pb.Consignment{
 		Description: "This is a test consignment",
-		Weight:      550,
+		Weight:      55000,
 		Containers: []*pb.Container{
 			{
 				CustomerId: "cust001",
 				UserId:     "user001",
 				Origin:     "Manchester, United Kingdom",
 			},
+			{
+				CustomerId: "cust002",
+				UserId:     "user001",
+				Origin:     "Derby, United Kingdom",
+			},
+			{
+				CustomerId: "cust005",
+				UserId:     "user001",
+				Origin:     "Sheffield, United Kingdom",
+			},
 		},
-		VesselId: "vessel001",
 	}
-
 	r, err := client.CreateConsignment(context.Background(), consignment)
 	if err != nil {
 		log.Fatalf("could not create: %v", err)
 	}
 	log.Printf("created: %t", r.Created)
-
 	getAll, err := client.GetConsignments(context.Background(), &pb.GetRequest{})
 	if err != nil {
 		log.Fatalf("could not list consignments: %v", err)
