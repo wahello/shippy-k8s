@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"os"
 
 	microclient "github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
+	"github.com/micro/go-micro/metadata"
 	"golang.org/x/net/context"
 
 	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
@@ -34,14 +36,20 @@ func main() {
 			},
 		},
 	}
-	r, err := client.CreateConsignment(context.Background(), consignment)
+	var token string
+	log.Println(os.Args)
+	token = os.Args[1]
+	ctx := metadata.NewContext(context.Background(), map[string]string{
+		"token": token,
+	})
+	r, err := client.CreateConsignment(ctx, consignment)
 	if err != nil {
-		log.Fatalf("could not create: %v", err)
+		log.Fatalf("Could not create: %v", err)
 	}
-	log.Printf("created: %t", r.Created)
-	getAll, err := client.GetConsignments(context.Background(), &pb.GetRequest{})
+	log.Printf("Created: %t", r.Created)
+	getAll, err := client.GetConsignments(ctx, &pb.GetRequest{})
 	if err != nil {
-		log.Fatalf("could not list consignments: %v", err)
+		log.Fatalf("Could not list consignments: %v", err)
 	}
 	for _, v := range getAll.Consignments {
 		log.Println(v)
