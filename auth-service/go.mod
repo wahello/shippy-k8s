@@ -24,7 +24,6 @@ require (
 	github.com/briankassouf/jose v0.9.1 // indirect
 	github.com/cenkalti/backoff v2.1.0+incompatible // indirect
 	github.com/centrify/cloud-golang-sdk v0.0.0-20180119173102-7c97cc6fde16 // indirect
-	github.com/cgault/shippy v0.0.0-20181226224235-9b6ba44819a6
 	github.com/chrismalek/oktasdk-go v0.0.0-20181212195951-3430665dfaa0 // indirect
 	github.com/circonus-labs/circonus-gometrics v2.2.5+incompatible // indirect
 	github.com/circonus-labs/circonusllhist v0.1.3 // indirect
@@ -63,10 +62,10 @@ require (
 	github.com/gogo/googleapis v1.1.0 // indirect
 	github.com/gogo/protobuf v1.2.0 // indirect
 	github.com/golang/groupcache v0.0.0-20181024230925-c65c006176ff // indirect
-	github.com/golang/protobuf v1.2.1-0.20181128192352-1d3f30b51784 // indirect
+	github.com/golang/protobuf v1.2.1-0.20181128192352-1d3f30b51784
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
 	github.com/google/go-github v17.0.0+incompatible // indirect
-	github.com/google/uuid v1.1.0 // indirect
+	github.com/google/uuid v1.1.0
 	github.com/googleapis/gax-go v2.0.2+incompatible // indirect
 	github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75 // indirect
 	github.com/gorilla/websocket v1.4.0 // indirect
@@ -122,6 +121,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/michaelklishin/rabbit-hole v1.4.0 // indirect
 	github.com/micro/cli v0.0.0-20181223203424-1b0c9793c300 // indirect
+	github.com/micro/examples v0.0.0-20181226152113-19d0e8ddd751 // indirect
 	github.com/micro/go-grpc v0.6.0 // indirect
 	github.com/micro/go-log v0.0.0-20170512141327-cbfa9447f9b6 // indirect
 	github.com/micro/go-micro v0.15.1
@@ -152,7 +152,7 @@ require (
 	github.com/prometheus/client_golang v0.9.2 // indirect
 	github.com/ryanuber/go-glob v0.0.0-20170128012129-256dc444b735 // indirect
 	github.com/samuel/go-zookeeper v0.0.0-20180130194729-c4fab1ac1bec // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
+	github.com/satori/go.uuid v1.2.0
 	github.com/shirou/gopsutil v2.18.11+incompatible // indirect
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/soheilhy/cmux v0.1.4 // indirect

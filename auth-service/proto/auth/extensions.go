@@ -1,12 +1,12 @@
 package auth
 
 import (
+	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	uuid "github.com/satori/go.uuid"
 )
 
 func (model *User) BeforeCreate(scope *gorm.Scope) error {
-	uuid, err := uuid.NewV4()
+	uuid, err := uuid.NewRandom()
 	if err != nil {
 		return err
 	}

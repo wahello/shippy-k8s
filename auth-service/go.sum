@@ -68,6 +68,7 @@ github.com/centrify/cloud-golang-sdk v0.0.0-20180119173102-7c97cc6fde16 h1:KXl7K
 github.com/centrify/cloud-golang-sdk v0.0.0-20180119173102-7c97cc6fde16/go.mod h1:C0rtzmGXgN78pYR0tGJFhtHgkbAs0lIbHwkB81VxDQE=
 github.com/cgault/shippy v0.0.0-20181226224235-9b6ba44819a6 h1:3+GV+aabz4V1BCMh19Yd7p7vban7s4V8sttOcXRomac=
 github.com/cgault/shippy v0.0.0-20181226224235-9b6ba44819a6/go.mod h1:h7uij321rNboW+4r4bHWTjfhiSknQuadt6hdl7BkxDM=
+github.com/cgault/shippy v0.0.0-20181226225221-524ca651e6c6 h1:EwW1jC7f/4EU+e4G/9hvVM72tfpZFxXXWK6nZvTb7Js=
 github.com/chrismalek/oktasdk-go v0.0.0-20181212195951-3430665dfaa0 h1:CWU8piLyqoi9qXEUwzOh5KFKGgmSU5ZhktJyYcq6ryQ=
 github.com/chrismalek/oktasdk-go v0.0.0-20181212195951-3430665dfaa0/go.mod h1:5d8DqS60xkj9k3aXfL3+mXBH0DPYO0FQjcKosxl+b/Q=
 github.com/circonus-labs/circonus-gometrics v2.2.5+incompatible h1:KsuY3ogbxgVv3FNhbLUoT+SE9znoWEUIuChSIT4HukI=
@@ -346,6 +347,8 @@ github.com/michaelklishin/rabbit-hole v1.4.0 h1:g80Jk11TqfI09Yn7FRze547z0FqNtU0I
 github.com/michaelklishin/rabbit-hole v1.4.0/go.mod h1:vvI1uOitYZi0O5HEGXhaWC1XT80Gy+HvFheJ+5Krlhk=
 github.com/micro/cli v0.0.0-20181223203424-1b0c9793c300 h1:MmeZIBmcbV9QSh0NQOC3vTgL/KoJvnrGugr+FBI3POM=
 github.com/micro/cli v0.0.0-20181223203424-1b0c9793c300/go.mod h1:x9x6qy+tXv17jzYWQup462+j3SIUgDa6vVTzU4IXy/w=
+github.com/micro/examples v0.0.0-20181226152113-19d0e8ddd751 h1:bazjYciecmxWJtbbXcudoQGN1A3ds06rmvBfB6h4qcY=
+github.com/micro/examples v0.0.0-20181226152113-19d0e8ddd751/go.mod h1:kAtxC8sjgEmhvistg+9GLxPiI/80SYSAMXObHcs1CFw=
 github.com/micro/go-grpc v0.6.0 h1:wKKaMTyPu1B9Jb5uDz2Vd3kIU3miNnd8fbAOQvJ5+CY=
 github.com/micro/go-grpc v0.6.0/go.mod h1:m8NMevmhL63muB3I1AnI8uf7YaW4YVjNIDW8PpQPRg8=
 github.com/micro/go-log v0.0.0-20170512141327-cbfa9447f9b6 h1:Nz+rX1q6rJLAQcLBB6maXYUmSvcdzJR2OArDKCDkco4=
@@ -360,7 +363,6 @@ github.com/micro/grpc-go v0.0.0-20180913204047-2c703400301b h1:tPWzIEV+QV2LrgdYd
 github.com/micro/grpc-go v0.0.0-20180913204047-2c703400301b/go.mod h1://clyXyptX/KfdauimE3DJIvC/TKOioMd9rb5blDZmI=
 github.com/micro/h2c v1.0.0 h1:ejw6MS5+WaUoMHRtqkVCCrrVzLMzOFEH52rEyd8Fl2I=
 github.com/micro/h2c v1.0.0/go.mod h1:54sOOQW/GRlHhH43vKwOhUb+kHaXhVxR0d3CJhn9alE=
-github.com/micro/kubernetes v0.1.0 h1:ZieKwKSf+O+taFGpQhFfZdQK4jb2fAPjf6W6lssKgRU=
 github.com/micro/kubernetes v0.1.1-0.20181206202331-0570d49f5931 h1:79238LFnQLoz8r2J7n7LdA3y45LdFqlUio1DuCe3mA8=
 github.com/micro/kubernetes v0.1.1-0.20181206202331-0570d49f5931/go.mod h1:YMCRhiXTTNCND35/YcgACDFd1tOTmrDFAEqsvkID6pw=
 github.com/micro/mdns v0.0.0-20181201230301-9c3770d4057a h1:QD0DngoQMpPt8pvimhNtIJiocn4C+IyqpazrEYX1lHo=

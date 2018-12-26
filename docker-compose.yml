@@ -30,8 +30,8 @@ services:
       MICRO_REGISTRY: "mdns"
       DB_HOST: "datastore:27017"
 
-  user-service:
-    build: ./user-service
+  auth-service:
+    build: ./auth-service
     ports:
       - 50053:50051
     environment:

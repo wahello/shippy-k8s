@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/cgault/shippy/user-service/proto/user"
+	pb "github.com/cgault/shippy/auth-service/proto/auth"
 	"github.com/micro/cli"
 	micro "github.com/micro/go-micro"
 	microclient "github.com/micro/go-micro/client"
@@ -14,7 +14,7 @@ import (
 
 func main() {
 	cmd.Init()
-	client := pb.NewUserService("go.micro.srv.user", microclient.DefaultClient)
+	client := pb.NewAuthService("go.micro.srv.auth", microclient.DefaultClient)
 	service := micro.NewService(
 		micro.Flags(
 			cli.StringFlag{

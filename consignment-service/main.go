@@ -6,14 +6,14 @@ import (
 	"log"
 	"os"
 
-	"golang.org/x/net/context"
-	"github.com/micro/go-micro"
+	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/server"
 	k8s "github.com/micro/kubernetes/go/micro"
+	"golang.org/x/net/context"
 
+	authService "github.com/cgault/shippy/auth-service/proto/auth"
 	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
-	userService "github.com/cgault/shippy/user-service/proto/auth"
 	vesselProto "github.com/cgault/shippy/vessel-service/proto/vessel"
 )
 
@@ -59,8 +59,8 @@ func AuthWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		}
 		token := meta["Token"]
 		log.Println("Authenticating with token: ", token)
-		authClient := userService.NewAuthClient("shippy.user", srv.Client())
-		_, err := authClient.ValidateToken(ctx, &userService.Token{
+		authClient := authService.NewAuthClient("shippy.user", srv.Client())
+		_, err := authClient.ValidateToken(ctx, &authService.Token{
 			Token: token,
 		})
 		if err != nil {

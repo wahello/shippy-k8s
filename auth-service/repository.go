@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/jinzhu/gorm"
 
-	pb "github.com/cgault/shippy/proto/auth"
+	pb "github.com/cgault/shippy/auth-service/proto/auth"
 )
 
 type Repository interface {

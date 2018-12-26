@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	pb "github.com/cgault/shippy/proto/auth"
+	pb "github.com/cgault/shippy/auth-service/proto/auth"
 )
 
 var (

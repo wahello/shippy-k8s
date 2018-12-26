@@ -7,7 +7,7 @@ import (
 	_ "github.com/micro/go-plugins/registry/mdns"
 	k8s "github.com/micro/kubernetes/go/micro"
 
-	pb "github.com/cgault/shippy/proto/auth"
+	pb "github.com/cgault/shippy/auth-service/proto/auth"
 )
 
 func main() {

@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/net/context"
 
-	pb "github.com/cgault/shippy/proto/auth"
+	pb "github.com/cgault/shippy/auth-service/proto/auth"
 )
 
 const topic = "user.created"
