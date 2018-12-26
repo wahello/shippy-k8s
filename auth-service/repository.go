@@ -1,8 +1,9 @@
 package main
 
 import (
-	pb "github.com/cgault/shippy/user-service/proto/auth"
 	"github.com/jinzhu/gorm"
+
+	pb "github.com/cgault/shippy/proto/auth"
 )
 
 type Repository interface {

@@ -1,5 +1,4 @@
 build:
-	protoc --micro_out=. --go_out=. ./proto/vessel/vessel.proto
 	docker build -t vessel-service .
 
 run:

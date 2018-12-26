@@ -1,5 +1,4 @@
 build:
-	protoc --micro_out=. --go_out=. ./proto/consignment/consignment.proto
 	docker build -t consignment-service .
 
 run:

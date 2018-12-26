@@ -1,6 +1,5 @@
 build:
-	protoc --micro_out=. --go_out=. ./proto/auth/auth.proto
-	docker build -t user-service .
+	docker build -t auth-service .
 
 run:
 	docker run --net="host" \
@@ -10,4 +9,4 @@ run:
 		-e DB_USER=postgres \
 		-e MICRO_SERVER_ADDRESS=:50051 \
 		-e MICRO_REGISTRY=mdns \
-		user-service
+		auth-service

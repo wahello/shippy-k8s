@@ -1,6 +1,7 @@
 github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da h1:8GUt8eRujhVEGZFFEjBj46YV4rDjvGrNxb0KMWYkL2I=
 github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da/go.mod h1:Q73ZrmVTwzkszR9V5SSuryQ31EELlFMUz1kKyl939pY=
 github.com/cgault/shippy v0.0.0-20181226043000-5aeb3106c44e h1:qgykWGaQq6fEPRoSJuzgHyUF98z1O0lDoXCYoabEjeM=
+github.com/cgault/shippy v0.0.0-20181226220334-0c5ab59cf7c5 h1:SC1DMx+7X11SWZpecCrW+X/6x8Sp2sywdAPtmVdxs2I=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/go-log/log v0.1.0 h1:wudGTNsiGzrD5ZjgIkVZ517ugi2XRe9Q/xRCzwEO4/U=
