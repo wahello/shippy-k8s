@@ -2,11 +2,11 @@ package main
 
 import (
 	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
-	"gopkg.in/mgo.v2"
+	mgo "gopkg.in/mgo.v2"
 )
 
 const (
-	dbName = "shippy"
+	dbName                = "shippy"
 	consignmentCollection = "consignments"
 )
 

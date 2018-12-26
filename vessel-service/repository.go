@@ -2,12 +2,12 @@ package main
 
 import (
 	pb "github.com/cgault/shippy/vessel-service/proto/vessel"
-	"gopkg.in/mgo.v2"
+	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 const (
-	dbName = "shippy"
+	dbName           = "shippy"
 	vesselCollection = "vessels"
 )
 
@@ -24,8 +24,8 @@ type VesselRepository struct {
 func (repo *VesselRepository) FindAvailable(spec *pb.Specification) (*pb.Vessel, error) {
 	var vessel *pb.Vessel
 	err := repo.collection().Find(bson.M{
-		"capacity": bson.M{ "$gte": spec.Capacity },
-		"maxweight": bson.M{ "$gte": spec.MaxWeight },
+		"capacity":  bson.M{"$gte": spec.Capacity},
+		"maxweight": bson.M{"$gte": spec.MaxWeight},
 	}).One(&vessel)
 	if err != nil {
 		return nil, err

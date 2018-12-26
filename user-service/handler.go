@@ -1,9 +1,16 @@
 package main
 
 import (
-	pb "github.com/cgault/shippy/user-service/proto/user"
+	"errors"
+	"fmt"
+	"log"
+
+	pb "github.com/cgault/shippy/user-service/proto/auth"
+	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/net/context"
 )
+
+const topic = "user.created"
 
 type service struct {
 	repo         Repository
@@ -29,22 +36,53 @@ func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Respons
 }
 
 func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error {
-	_, err := srv.repo.GetByEmailAndPassword(req)
+	log.Println("Logging in with:", req.Email, req.Password)
+	user, err := srv.repo.GetByEmail(req.Email)
+	log.Println(user, err)
 	if err != nil {
 		return err
 	}
-	res.Token = "testingabc"
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
+		return err
+	}
+	token, err := srv.tokenService.Encode(user)
+	if err != nil {
+		return err
+	}
+	res.Token = token
 	return nil
 }
 
 func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) error {
+	log.Println("Creating user: ", req)
+	hashedPass, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return errors.New(fmt.Sprintf("error hashing password: %v", err))
+	}
+	req.Password = string(hashedPass)
 	if err := srv.repo.Create(req); err != nil {
+		return errors.New(fmt.Sprintf("error creating user: %v", err))
+	}
+	token, err := srv.tokenService.Encode(req)
+	if err != nil {
 		return err
 	}
 	res.User = req
+	res.Token = &pb.Token{Token: token}
+	// if err := srv.Publisher.Publish(ctx, req); err != nil {
+	// 	return errors.New(fmt.Sprintf("error publishing event: %v", err))
+	// }
 	return nil
 }
 
 func (srv *service) ValidateToken(ctx context.Context, req *pb.Token, res *pb.Token) error {
+	claims, err := srv.tokenService.Decode(req.Token)
+	if err != nil {
+		return err
+	}
+	if claims.User.Id == "" {
+		return errors.New("invalid user")
+	}
+	res.Valid = true
 	return nil
 }

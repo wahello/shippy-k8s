@@ -15,8 +15,9 @@ func (s *service) GetRepo() Repository {
 }
 
 func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res *pb.Response) error {
-	defer s.GetRepo().Close()
-	vessel, err := s.GetRepo().FindAvailable(req)
+	repo := s.GetRepo()
+	defer repo.Close()
+	vessel, err := repo.FindAvailable(req)
 	if err != nil {
 		return err
 	}
@@ -25,8 +26,9 @@ func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res 
 }
 
 func (s *service) Create(ctx context.Context, req *pb.Vessel, res *pb.Response) error {
-	defer s.GetRepo().Close()
-	if err := s.GetRepo().Create(req); err != nil {
+	repo := s.GetRepo()
+	defer repo.Close()
+	if err := repo.Create(req); err != nil {
 		return err
 	}
 	res.Vessel = req

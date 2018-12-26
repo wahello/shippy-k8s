@@ -3,6 +3,8 @@ cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da h1:8GUt8eRujhVEGZFFEjBj46YV4rDjvGrNxb0KMWYkL2I=
 github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da/go.mod h1:Q73ZrmVTwzkszR9V5SSuryQ31EELlFMUz1kKyl939pY=
 github.com/cgault/shippy v0.0.0-20181226012737-4de57f95e8ab h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+github.com/cgault/shippy v0.0.0-20181226043000-5aeb3106c44e h1:qgykWGaQq6fEPRoSJuzgHyUF98z1O0lDoXCYoabEjeM=
+github.com/cgault/shippy/user-service v0.0.0-20181226043000-5aeb3106c44e h1:glpCKi5af0/pA6NRg5oMvWMF7ud5RdqYeXlwmrlaTVI=
 github.com/cgault/shippy/vessel-service v0.0.0-20181226015433-787d90352199 h1:nfda5H2aP30FClSPXucs2XS7IAslNM7FUF/lwpZOS8s=
 github.com/cgault/shippy/vessel-service v0.0.0-20181226015433-787d90352199/go.mod h1:tSqvq/Mo1z+0nJC1xpOUM/SMVDx0Wf/QiMTKvpd/ZII=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -53,6 +55,7 @@ github.com/micro/go-rcache v0.0.0-20180418165751-a581a57b5133 h1:hA0jzfRMat31ugT
 github.com/micro/go-rcache v0.0.0-20180418165751-a581a57b5133/go.mod h1:CBzgfnsCYHcyLg1qeTShF0iDErQmcLmSt+SdwjLkckI=
 github.com/micro/h2c v1.0.0 h1:ejw6MS5+WaUoMHRtqkVCCrrVzLMzOFEH52rEyd8Fl2I=
 github.com/micro/h2c v1.0.0/go.mod h1:54sOOQW/GRlHhH43vKwOhUb+kHaXhVxR0d3CJhn9alE=
+github.com/micro/kubernetes v0.1.0 h1:ZieKwKSf+O+taFGpQhFfZdQK4jb2fAPjf6W6lssKgRU=
 github.com/micro/mdns v0.0.0-20181201230301-9c3770d4057a h1:QD0DngoQMpPt8pvimhNtIJiocn4C+IyqpazrEYX1lHo=
 github.com/micro/mdns v0.0.0-20181201230301-9c3770d4057a/go.mod h1:SQG6o/94RinohLuB5noHSevg2Iqg2wXLDUn4lj2LWWo=
 github.com/micro/util v0.0.0-20181115195001-2d4f591dc538 h1:8kG8BwYfwa3XApLhHmPkoPq4qiQjKQZR8XA024LPrq4=

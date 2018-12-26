@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-
 	"os"
 
+	"github.com/micro/go-micro"
+	k8s "github.com/micro/kubernetes/go/micro"
+
 	pb "github.com/cgault/shippy/vessel-service/proto/vessel"
-	micro "github.com/micro/go-micro"
 )
 
 const (
@@ -32,12 +33,12 @@ func main() {
 	session, err := CreateSession(host)
 	defer session.Close()
 	if err != nil {
-		log.Fatalf("Error connecting to datastore: %v", err)
+		log.Fatalf("Error connecting to datastore %s: %v", host, err)
 	}
 	repo := &VesselRepository{session.Copy()}
 	createDummyData(repo)
-	srv := micro.NewService(
-		micro.Name("go.micro.srv.vessel"),
+	srv := k8s.NewService(
+		micro.Name("shippy.vessel"),
 		micro.Version("latest"),
 	)
 	srv.Init()

@@ -18,17 +18,18 @@ func (s *service) GetRepo() Repository {
 	return &ConsignmentRepository{s.session.Clone()}
 }
 
-func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
+func (s *service) Create(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
 	repo := s.GetRepo()
 	defer repo.Close()
+	log.Println("Creating: ", req)
 	vesselResponse, err := s.vesselClient.FindAvailable(context.Background(), &vesselProto.Specification{
 		MaxWeight: req.Weight,
 		Capacity:  int32(len(req.Containers)),
 	})
-	log.Printf("Found vessel: %s \n", vesselResponse.Vessel.Name)
 	if err != nil {
 		return err
 	}
+	log.Printf("Found vessel: %s \n", vesselResponse.Vessel.Name)
 	req.VesselId = vesselResponse.Vessel.Id
 	err = repo.Create(req)
 	if err != nil {
@@ -39,7 +40,7 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 	return nil
 }
 
-func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+func (s *service) Get(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
 	repo := s.GetRepo()
 	defer repo.Close()
 	consignments, err := repo.GetAll()

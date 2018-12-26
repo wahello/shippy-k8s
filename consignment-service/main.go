@@ -1,17 +1,28 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
 
+	"golang.org/x/net/context"
+	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/metadata"
+	"github.com/micro/go-micro/server"
+	k8s "github.com/micro/kubernetes/go/micro"
+
 	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
+	userService "github.com/cgault/shippy/user-service/proto/auth"
 	vesselProto "github.com/cgault/shippy/vessel-service/proto/vessel"
-	micro "github.com/micro/go-micro"
 )
 
 const (
 	defaultHost = "localhost:27017"
+)
+
+var (
+	srv micro.Service
 )
 
 func main() {
@@ -24,14 +35,38 @@ func main() {
 	if err != nil {
 		log.Panicf("Could not connect to datastore with host %s - %v", host, err)
 	}
-	srv := micro.NewService(
-		micro.Name("go.micro.srv.consignment"),
+	srv = k8s.NewService(
+		micro.Name("shippy.consignment"),
 		micro.Version("latest"),
+		micro.WrapHandler(AuthWrapper),
 	)
-	vesselClient := vesselProto.NewVesselService("go.micro.srv.vessel", srv.Client())
+	vesselClient := vesselProto.NewVesselServiceClient("shippy.vessel", srv.Client())
 	srv.Init()
-	pb.RegisterShippingServiceHandler(srv.Server(), &service{session, vesselClient})
+	pb.RegisterConsignmentServiceHandler(srv.Server(), &service{session, vesselClient})
 	if err := srv.Run(); err != nil {
 		fmt.Println(err)
+	}
+}
+
+func AuthWrapper(fn server.HandlerFunc) server.HandlerFunc {
+	return func(ctx context.Context, req server.Request, resp interface{}) error {
+		if os.Getenv("DISABLE_AUTH") == "true" {
+			return fn(ctx, req, resp)
+		}
+		meta, ok := metadata.FromContext(ctx)
+		if !ok {
+			return errors.New("no auth meta-data found in request")
+		}
+		token := meta["Token"]
+		log.Println("Authenticating with token: ", token)
+		authClient := userService.NewAuthClient("shippy.user", srv.Client())
+		_, err := authClient.ValidateToken(ctx, &userService.Token{
+			Token: token,
+		})
+		if err != nil {
+			return err
+		}
+		err = fn(ctx, req, resp)
+		return err
 	}
 }

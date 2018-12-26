@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
-	pb "github.com/cgault/shippy/user-service/proto/user"
-	micro "github.com/micro/go-micro"
+	pb "github.com/cgault/shippy/user-service/proto/auth"
+	"github.com/micro/go-micro"
+	_ "github.com/micro/go-plugins/registry/mdns"
+	k8s "github.com/micro/kubernetes/go/micro"
 )
 
 func main() {
@@ -17,13 +18,12 @@ func main() {
 	db.AutoMigrate(&pb.User{})
 	repo := &UserRepository{db}
 	tokenService := &TokenService{repo}
-	srv := micro.NewService(
-		micro.Name("go.micro.srv.user"),
-		micro.Version("latest"),
+	srv := k8s.NewService(
+		micro.Name("shippy.auth"),
 	)
 	srv.Init()
-	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService})
+	pb.RegisterAuthHandler(srv.Server(), &service{repo, tokenService})
 	if err := srv.Run(); err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 }
