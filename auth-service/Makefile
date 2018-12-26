@@ -1,4 +1,5 @@
 build:
+	protoc --micro_out=. --go_out=. ./proto/auth/auth.proto
 	docker build -t auth-service .
 
 run:
