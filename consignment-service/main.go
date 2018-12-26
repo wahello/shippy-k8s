@@ -5,7 +5,7 @@ import (
 	"context"
 	"log"
 
-	pb "shippy/consignment-service/proto/consignment"
+	pb "github.com/cgault/shippy/consignment-service/proto/consignment"
 
 	micro "github.com/micro/go-micro"
 )
