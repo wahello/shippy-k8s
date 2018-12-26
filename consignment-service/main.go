@@ -31,7 +31,7 @@ func (repo *ConsignmentRepository) GetAll() []*pb.Consignment {
 
 type service struct {
 	repo         Repository
-	vesselClient vesselProto.VesselServiceClient
+	vesselClient vesselProto.VesselService
 }
 
 func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
@@ -62,10 +62,10 @@ func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *
 func main() {
 	repo := &ConsignmentRepository{}
 	srv := micro.NewService(
-		micro.Name("consignment"),
+		micro.Name("go.micro.srv.consignment"),
 		micro.Version("latest"),
 	)
-	vesselClient := vesselProto.NewVesselServiceClient("go.micro.srv.vessel", srv.Client())
+	vesselClient := vesselProto.NewVesselService("go.micro.srv.vessel", srv.Client())
 	srv.Init()
 	pb.RegisterShippingServiceHandler(srv.Server(), &service{repo, vesselClient})
 	if err := srv.Run(); err != nil {
