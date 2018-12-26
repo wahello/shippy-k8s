@@ -2,6 +2,7 @@ module github.com/cgault/shippy/consignment-service
 
 require (
 	cloud.google.com/go v0.34.0 // indirect
+	github.com/cgault/shippy/user-service v0.0.0-20181226220227-3eda859a44ad
 	github.com/cgault/shippy/vessel-service v0.0.0-20181226015433-787d90352199
 	github.com/golang/mock v1.2.0 // indirect
 	github.com/golang/protobuf v1.2.1-0.20181128192352-1d3f30b51784
