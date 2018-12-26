@@ -62,4 +62,5 @@ vessel-service/vessel-service
 consignment-service/consignment-service
 consignment-cli/consignment-cli
 auth-service/auth-service
+email-service/email-service
 user-cli/user-cli
