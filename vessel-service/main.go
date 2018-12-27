@@ -5,14 +5,16 @@ import (
 	"log"
 	"os"
 
-	"github.com/micro/go-micro"
+	micro "github.com/micro/go-micro"
 	k8s "github.com/micro/kubernetes/go/micro"
 
 	pb "github.com/cgault/shippy/vessel-service/proto/vessel"
 )
 
 const (
-	defaultHost = "localhost:27017"
+	serviceName    = "shippy.vessel"
+	serviceVersion = "latest"
+	defaultHost    = "localhost:27017"
 )
 
 func createDummyData(repo Repository) {
@@ -38,8 +40,8 @@ func main() {
 	repo := &VesselRepository{session.Copy()}
 	createDummyData(repo)
 	srv := k8s.NewService(
-		micro.Name("shippy.vessel"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 	)
 	srv.Init()
 	pb.RegisterVesselServiceHandler(srv.Server(), &service{session})

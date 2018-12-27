@@ -8,7 +8,11 @@ import (
 	micro "github.com/micro/go-micro"
 )
 
-const topic = "user.created"
+const (
+	serviceName    = "shippy.email"
+	serviceVersion = "latest"
+	topic          = "user.created"
+)
 
 type Subscriber struct{}
 
@@ -20,8 +24,8 @@ func (sub *Subscriber) Process(ctx context.Context, user *pb.User) error {
 
 func main() {
 	srv := micro.NewService(
-		micro.Name("go.micro.srv.email"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 	)
 	srv.Init()
 	micro.RegisterSubscriber(topic, srv.Server(), new(Subscriber))

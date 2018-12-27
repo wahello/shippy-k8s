@@ -10,6 +10,11 @@ import (
 	pb "github.com/cgault/shippy/auth-service/proto/auth"
 )
 
+const (
+	serviceName    = "shippy.auth"
+	serviceVersion = "latest"
+)
+
 func main() {
 	db, err := CreateConnection()
 	defer db.Close()
@@ -19,8 +24,9 @@ func main() {
 	db.AutoMigrate(&pb.User{})
 	repo := &UserRepository{db}
 	tokenService := &TokenService{repo}
-	srv := k8s.NewService(
-		micro.Name("shippy.auth"),
+	srv = k8s.NewService(
+		micro.Name(serviceName),
+		micro.Version(serviceVersion)
 	)
 	srv.Init()
 	pb.RegisterAuthHandler(srv.Server(), &service{repo, tokenService})

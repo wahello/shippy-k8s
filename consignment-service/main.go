@@ -18,7 +18,9 @@ import (
 )
 
 const (
-	defaultHost = "localhost:27017"
+	serviceName    = "shippy.consignment"
+	serviceVersion = "latest"
+	defaultHost    = "localhost:27017"
 )
 
 var (
@@ -36,8 +38,8 @@ func main() {
 		log.Panicf("Could not connect to datastore with host %s - %v", host, err)
 	}
 	srv = k8s.NewService(
-		micro.Name("shippy.consignment"),
-		micro.Version("latest"),
+		micro.Name(serviceName),
+		micro.Version(serviceVersion),
 		micro.WrapHandler(AuthWrapper),
 	)
 	vesselClient := vesselProto.NewVesselService("shippy.vessel", srv.Client())
