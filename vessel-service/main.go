@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
-	pb "github.com/cgault/shippy-vessel-service/proto/vessel"
-	"github.com/micro/go-micro"
+	pb "github.com/cgault/shippy/vessel-service/proto/vessel"
+	micro "github.com/micro/go-micro"
 	k8s "github.com/micro/kubernetes/go/micro"
 )
 
