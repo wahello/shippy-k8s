@@ -5,16 +5,9 @@ import (
 	"log"
 	"os"
 
-	micro "github.com/micro/go-micro"
+	pb "github.com/cgault/shippy-vessel-service/proto/vessel"
+	"github.com/micro/go-micro"
 	k8s "github.com/micro/kubernetes/go/micro"
-
-	pb "github.com/cgault/shippy/vessel-service/proto/vessel"
-)
-
-const (
-	serviceName    = "shippy.vessel"
-	serviceVersion = "latest"
-	defaultHost    = "localhost:27017"
 )
 
 func createDummyData(repo Repository) {
@@ -28,20 +21,19 @@ func createDummyData(repo Repository) {
 }
 
 func main() {
-	host := os.Getenv("DB_HOST")
-	if host == "" {
-		host = defaultHost
-	}
-	session, err := CreateSession(host)
-	defer session.Close()
+	shard1 := os.Getenv("MONGO_SHARD_1")
+	shard2 := os.Getenv("MONGO_SHARD_2")
+	session, err := CreateSession(shard1, shard2)
 	if err != nil {
-		log.Fatalf("Error connecting to datastore %s: %v", host, err)
+		panic(err)
 	}
+	defer session.Close()
+	fmt.Printf("Connected to %v!\n", session.LiveServers())
 	repo := &VesselRepository{session.Copy()}
 	createDummyData(repo)
 	srv := k8s.NewService(
-		micro.Name(serviceName),
-		micro.Version(serviceVersion),
+		micro.Name("shippy.vessel"),
+		micro.Version("latest"),
 	)
 	srv.Init()
 	pb.RegisterVesselServiceHandler(srv.Server(), &service{session})

@@ -14,16 +14,18 @@ spec:
     spec:
         containers:
         - name: vessel-service
-          image: tsicg/vessel-service:latest
+          image: gcr.io/cgault-sandbox/vessel-service:latest
           imagePullPolicy: Always
           command: [
-            "./shippy/vessel-service",
+            "/go/bin/server",
             "--selector=static",
             "--server_address=:8080"
           ]
           env:
-          - name: DB_HOST
-            value: "mongo:27017"
+          - name: MONGO_SHARD_1
+            value: "mongodb-shard1-0.mongodb-shard1-headless-service.NAMESPACE_ID.svc.cluster.local:27017"
+          - name: MONGO_SHARD_2
+            value: "mongodb-shard2-0.mongodb-shard2-headless-service.NAMESPACE_ID.svc.cluster.local:27017"
           - name: UPDATED_AT
             value: "{{ UPDATED_AT }}"
           ports:

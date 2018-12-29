@@ -1,0 +1,74 @@
+# apiVersion: apps/v1beta1
+# kind: Deployment
+# metadata:
+#   name: vessel
+#   namespace: daemonsl
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: vessel
+#   template:
+#     metadata:
+#       labels:
+#         app: vessel
+#     spec:
+#         containers:
+#         - name: vessel-service
+#           image: gcr.io/cgault-sandbox/vessel-service:latest
+#           imagePullPolicy: Always
+#           # command: [
+#           #   "/go/bin/server",
+#           #   "--selector=static",
+#           #   "--server_address=:8080"
+#           # ]
+#           env:
+#           - name: MONGO_SHARD_1
+#             value: "mongodb-shard1-0.mongodb-shard1-headless-service.daemonsl.svc.cluster.local:27017"
+#           - name: MONGO_SHARD_2
+#             value: "mongodb-shard2-0.mongodb-shard2-headless-service.daemonsl.svc.cluster.local:27017"
+#           - name: UPDATED_AT
+#             value: "Fri Dec 28 16:36:36 CST 2018"
+#           ports:
+#           - containerPort: 8080
+#             name: vessel-port
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vessel
+  namespace: daemonsl
+spec:
+  template:
+    metadata:
+      labels:
+        app: vessel
+    spec:
+      containers:
+        - name: server
+          image: gcr.io/cgault-sandbox/vessel-service:latest
+          ports:
+          - containerPort: 8080
+          # readinessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          # livenessProbe:
+          #   initialDelaySeconds: 10
+          #   httpGet:
+          #     path: "/_healthz"
+          #     port: 8080
+          env:
+          - name: MONGO_SHARD_1
+            value: "mongodb-shard1-0.mongodb-shard1-headless-service.daemonsl.svc.cluster.local:27017"
+          - name: MONGO_SHARD_2
+            value: "mongodb-shard2-0.mongodb-shard2-headless-service.daemonsl.svc.cluster.local:27017"
+          - name: UPDATED_AT
+            value: "Fri Dec 28 16:36:36 CST 2018"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi

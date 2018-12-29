@@ -8,8 +8,10 @@ COPY go.* ./
 RUN go mod download
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/bin/server -a -installsuffix cgo main.go repository.go handler.go datastore.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/bin/server -a -installsuffix cgo main.go
 
 FROM scratch as release
 COPY --from=builder /go/bin/server /go/bin/server
-ENTRYPOINT ["/go/bin/server"]
+EXPOSE 8080
+# ENTRYPOINT ["/go/bin/server"]
+CMD ["/go/bin/server"]
